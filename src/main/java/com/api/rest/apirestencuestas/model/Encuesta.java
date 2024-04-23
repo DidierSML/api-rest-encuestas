@@ -22,7 +22,7 @@ public class Encuesta {
     @Column(name ="pregunta")
     private String pregunta;
 
-    //Una Encuesta va a tener muchas Opciones
+    //Una -Encuesta- va a tener -Muchas- Opciones
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "encuesta_id")
     @OrderBy

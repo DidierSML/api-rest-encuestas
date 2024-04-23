@@ -17,7 +17,7 @@ public class Voto {
     @Column (name = "voto_id")
     private Long id;
 
-    //Muchos Votos va a tener una opcion
+    //Muchos -Votos- va a tener una -opción-
     @ManyToOne
     @JoinColumn(name = "opcion_id")
     private Opcion opcion;
