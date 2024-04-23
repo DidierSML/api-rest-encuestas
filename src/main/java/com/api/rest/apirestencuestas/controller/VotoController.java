@@ -1,6 +1,6 @@
 package com.api.rest.apirestencuestas.controller;
 
-import com.api.rest.apirestencuestas.service.OpcionService;
+import com.api.rest.apirestencuestas.service.impl.OpcionServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/voto")
 public class VotoController {
 
-    private final OpcionService opcionService;
+    private final OpcionServiceImpl opcionServiceImpl;
 
 }
