@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +23,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
 
 
     @Override
-    public EncuestaDto createUser(EncuestaRequest encuestaRequest) {
+    public EncuestaDto createEncuesta (EncuestaRequest encuestaRequest) {
 
         Encuesta encuesta = mapperEncuesta.fromRequestToEntity(encuestaRequest);
 
@@ -59,12 +58,18 @@ public class EncuestaServiceImpl  implements EncuestaService {
                 orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
 
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
-//        existingEncuesta.setOpciones(encuestaRequest.getOpciones());
-        return null;
+//      existingEncuesta.setOpciones(encuestaRequest.getOpciones());
+
+        return mapperEncuesta.fromEntityToDto(existingEncuesta);
     }
 
     @Override
     public void deleteEncuestaById(Long encuestaId) {
+
+        Encuesta encuesta = encuestaRepository.findById(encuestaId).
+                orElseThrow(()-> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
+
+        encuestaRepository.delete(encuesta);
 
     }
 }
