@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EncuestaService {
 
-    EncuestaDto createUser (EncuestaRequest encuestaRequest);
+    EncuestaDto createEncuesta (EncuestaRequest encuestaRequest);
 
     List <EncuestaDto> getAllEncuestas ();
 
