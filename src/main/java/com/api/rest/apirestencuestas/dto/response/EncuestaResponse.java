@@ -11,6 +11,6 @@ public class EncuestaResponse {
 
     private String pregunta;
 
-    private Set <String> opciones;
+    private Set <OpcionResponse> opciones;
 
 }

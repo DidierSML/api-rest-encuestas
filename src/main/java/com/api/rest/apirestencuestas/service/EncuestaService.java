@@ -10,7 +10,7 @@ public interface EncuestaService {
 
     EncuestaDto createUser (EncuestaRequest encuestaRequest);
 
-    List <EncuestaDto> getAllEncuestas (List <EncuestaRequest> encuestaRequestList);
+    List <EncuestaDto> getAllEncuestas ();
 
     EncuestaDto getEncuestaById (Long encuestaId);
 

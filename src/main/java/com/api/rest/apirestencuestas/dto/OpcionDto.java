@@ -3,8 +3,10 @@ package com.api.rest.apirestencuestas.dto;
 import lombok.Data;
 
 @Data
-public class OpcionesDto {
+public class OpcionDto {
 
+    private Long id;
 
+    private String value;
 
 }
