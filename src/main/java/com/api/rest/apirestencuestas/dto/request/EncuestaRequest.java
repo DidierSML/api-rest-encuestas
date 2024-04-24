@@ -16,5 +16,5 @@ public class EncuestaRequest {
     private String pregunta;
 
     @NotEmpty (message = "La pregunta debe contener al menos una opción")
-    private Set<String> opciones;
+    private Set <OpcionRequest> opciones;
 }

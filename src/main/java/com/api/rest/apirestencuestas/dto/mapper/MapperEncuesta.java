@@ -7,7 +7,6 @@ import com.api.rest.apirestencuestas.model.Encuesta;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-
 import java.util.List;
 
 
@@ -20,11 +19,10 @@ public interface MapperEncuesta {
 
     EncuestaDto fromEntityToDto (Encuesta encuesta);
 
-    List <EncuestaDto> fromEncuestaDtoToResponse (List <Encuesta> encuesta);
+    List <EncuestaDto> fromEntityListToDtoList (List <Encuesta> encuesta);
 
     EncuestaResponse fromDtoToResponse (EncuestaDto encuestaDto);
 
-    List <EncuestaResponse> fromListDtoToListResponse (List <EncuestaDto> encuestaDtoList);
-
+    List <EncuestaResponse> fromDtoListToResponseList (List <EncuestaDto> encuestaDtoList);
 
 }

@@ -11,5 +11,5 @@ public class EncuestaDto {
 
     private String pregunta;
 
-    private Set <String> opciones;
+    private Set <OpcionDto> opciones;
 }

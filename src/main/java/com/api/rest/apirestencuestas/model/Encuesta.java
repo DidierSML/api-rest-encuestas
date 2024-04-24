@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,7 +27,7 @@ public class Encuesta {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "encuesta_id")
     @OrderBy
-    private Set <Opcion> opciones;
+    private Set <Opcion> opciones = new HashSet<>();
 
 
 
