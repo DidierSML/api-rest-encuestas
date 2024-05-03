@@ -58,7 +58,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
                 orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
 
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
-//      existingEncuesta.setOpciones(encuestaRequest.getOpciones());
+        //existingEncuesta.setOpciones(encuestaRequest.getOpciones());
 
         return mapperEncuesta.fromEntityToDto(existingEncuesta);
     }
