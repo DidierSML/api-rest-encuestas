@@ -16,7 +16,7 @@ import java.util.Set;
 public class Encuesta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue //Para este caso
     @Column(name = "encuesta_id")
     private Long id;
 
