@@ -34,7 +34,7 @@ public class EncuestaController {
         return mapperEncuesta.fromDtoListToResponseList(encuestaServiceImpl.getAllEncuestas());
     }
 
-    @GetMapping("{encuestaId")
+    @GetMapping("{encuestaId}")
     @ResponseStatus(HttpStatus.OK)
     public EncuestaResponse getEncuestaById (@PathVariable (value = "encuestaId") Long encuestaId){
 
