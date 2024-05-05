@@ -2,7 +2,9 @@ package com.api.rest.apirestencuestas.dto.request;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import lombok.Data;
 
+@Data
 public class OpcionRequest {
 
     private Long id;
