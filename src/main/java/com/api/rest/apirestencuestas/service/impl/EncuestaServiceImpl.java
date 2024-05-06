@@ -67,10 +67,23 @@ public class EncuestaServiceImpl  implements EncuestaService {
         Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
         Set<Opcion> opcionesList = new HashSet<>();
 
+        Set<Opcion> existingOpciones = existingEncuesta.getOpciones();
+
         for(OpcionRequest opcionRequest: opcionesRequestList){
 
-            Opcion opcion = new Opcion();
-            opcion.setValue(opcionRequest.getValue());
+            Opcion opcion = null;
+
+            for(Opcion existingOpcion : existingOpciones){
+                if(existingOpcion.getValue().equals(opcionRequest.getValue())) {
+                    opcion = existingOpcion;
+                    break;
+                }
+            }
+
+            if(opcion == null){
+                opcion = new Opcion();
+                opcion.setValue(opcionRequest.getValue());
+            }
 
             opcionesList.add(opcion);
         }
