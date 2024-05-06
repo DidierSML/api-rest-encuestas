@@ -3,14 +3,19 @@ package com.api.rest.apirestencuestas.service.impl;
 import com.api.rest.apirestencuestas.dto.EncuestaDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperEncuesta;
 import com.api.rest.apirestencuestas.dto.request.EncuestaRequest;
+import com.api.rest.apirestencuestas.dto.request.OpcionRequest;
 import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
 import com.api.rest.apirestencuestas.model.Encuesta;
+import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
+import com.api.rest.apirestencuestas.repository.OpcionRepository;
 import com.api.rest.apirestencuestas.service.EncuestaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -58,7 +63,22 @@ public class EncuestaServiceImpl  implements EncuestaService {
                 orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
 
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
-        //existingEncuesta.setOpciones(encuestaRequest.getOpciones());
+
+        Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
+        Set<Opcion> opcionesList = new HashSet<>();
+
+        for(OpcionRequest opcionRequest: opcionesRequestList){
+
+            Opcion opcion = new Opcion();
+            opcion.setValue(opcionRequest.getValue());
+
+            opcionesList.add(opcion);
+        }
+
+        existingEncuesta.setOpciones(opcionesList);
+
+        existingEncuesta = encuestaRepository.save(existingEncuesta);
+
 
         return mapperEncuesta.fromEntityToDto(existingEncuesta);
     }
@@ -73,3 +93,17 @@ public class EncuestaServiceImpl  implements EncuestaService {
 
     }
 }
+
+/*  @Override
+    public EncuestaDto updateEncuestaById(Long encuestaId, EncuestaRequest encuestaRequest) {
+
+        Encuesta existingEncuesta = encuestaRepository.findById(encuestaId).
+                orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
+
+        existingEncuesta.setPregunta(encuestaRequest.getPregunta());
+        //existingEncuesta.setOpcion(encuestaRequest.getOpciones());
+
+        return mapperEncuesta.fromEntityToDto(existingEncuesta);
+    }
+
+ */
