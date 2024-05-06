@@ -28,8 +28,47 @@ public class Encuesta {
     @JoinColumn(name = "encuesta_id")
     @OrderBy
     private Set <Opcion> opciones = new HashSet<>();
-
-
+    //A través de este Set<Opcion> podemos enviar nuestras Opciones en el "saveEncuesta" desde -Postman-
 
 
 }
+/*
+    "saveEncuesta" -> lógica
+    {
+        "pregunta": "¿Cual es el lenguaje de programación más popular en 2024?",
+        "opciones":
+            [
+                {"value": "Java"},
+                {"value": "Phyton"},
+                {"value": "Go"},
+                {"value": "Javascript"}
+            ]
+
+    }
+    ---------------------------------------------------------------------------------
+
+    "saveEncuesta" <- lógica------------------------------Status(201)Created
+
+     {
+        "id": 1,
+        "pregunta": "¿Cual es el lenguaje de programación más popular en 2024?",
+        "opciones": [
+            {
+                "id": 1,
+                "value": "Phyton"
+            },
+            {
+                "id": 2,
+                "value": "Java"
+            },
+            {
+                "id": 3,
+                "value": "Go"
+            },
+            {
+                "id": 4,
+                "value": "Javascript"
+            }
+        ]
+    }
+ */
