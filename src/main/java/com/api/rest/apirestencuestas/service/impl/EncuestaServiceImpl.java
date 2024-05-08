@@ -65,6 +65,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
 
         Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
+
         Set<Opcion> opcionesList = new HashSet<>();
 
         Set<Opcion> existingOpciones = existingEncuesta.getOpciones();
@@ -107,16 +108,48 @@ public class EncuestaServiceImpl  implements EncuestaService {
     }
 }
 
-/*  @Override
+/*
+
+    @Override
     public EncuestaDto updateEncuestaById(Long encuestaId, EncuestaRequest encuestaRequest) {
 
         Encuesta existingEncuesta = encuestaRepository.findById(encuestaId).
                 orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
 
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
-        //existingEncuesta.setOpcion(encuestaRequest.getOpciones());
+
+        Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
+        Set<Opcion> opcionesList = new HashSet<>();
+
+        Set<Opcion> existingOpciones = existingEncuesta.getOpciones();
+
+        for(OpcionRequest opcionRequest: opcionesRequestList){
+
+            Opcion opcion = null;
+
+            for(Opcion existingOpcion : existingOpciones){
+                if(existingOpcion.getValue().equals(opcionRequest.getValue())) {
+                    opcion = existingOpcion;
+                    break;
+                }
+            }
+
+            if(opcion == null){
+                opcion = new Opcion();
+                opcion.setValue(opcionRequest.getValue());
+            }
+
+            opcionesList.add(opcion);
+        }
+
+        existingEncuesta.setOpciones(opcionesList);
+
+        existingEncuesta = encuestaRepository.save(existingEncuesta);
+
 
         return mapperEncuesta.fromEntityToDto(existingEncuesta);
     }
 
  */
+
+
