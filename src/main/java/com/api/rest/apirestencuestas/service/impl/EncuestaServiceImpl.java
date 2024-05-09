@@ -8,11 +8,11 @@ import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
 import com.api.rest.apirestencuestas.model.Encuesta;
 import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
-import com.api.rest.apirestencuestas.repository.OpcionRepository;
 import com.api.rest.apirestencuestas.service.EncuestaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,6 +53,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
         Encuesta encuesta = encuestaRepository.findById(encuestaId).
                 orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
 
+
         return mapperEncuesta.fromEntityToDto(encuesta);
     }
 
@@ -65,7 +66,6 @@ public class EncuestaServiceImpl  implements EncuestaService {
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
 
         Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
-
         Set<Opcion> opcionesList = new HashSet<>();
 
         Set<Opcion> existingOpciones = existingEncuesta.getOpciones();
@@ -110,45 +110,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
 
 /*
 
-    @Override
-    public EncuestaDto updateEncuestaById(Long encuestaId, EncuestaRequest encuestaRequest) {
 
-        Encuesta existingEncuesta = encuestaRepository.findById(encuestaId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
-
-        existingEncuesta.setPregunta(encuestaRequest.getPregunta());
-
-        Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
-        Set<Opcion> opcionesList = new HashSet<>();
-
-        Set<Opcion> existingOpciones = existingEncuesta.getOpciones();
-
-        for(OpcionRequest opcionRequest: opcionesRequestList){
-
-            Opcion opcion = null;
-
-            for(Opcion existingOpcion : existingOpciones){
-                if(existingOpcion.getValue().equals(opcionRequest.getValue())) {
-                    opcion = existingOpcion;
-                    break;
-                }
-            }
-
-            if(opcion == null){
-                opcion = new Opcion();
-                opcion.setValue(opcionRequest.getValue());
-            }
-
-            opcionesList.add(opcion);
-        }
-
-        existingEncuesta.setOpciones(opcionesList);
-
-        existingEncuesta = encuestaRepository.save(existingEncuesta);
-
-
-        return mapperEncuesta.fromEntityToDto(existingEncuesta);
-    }
 
  */
 
