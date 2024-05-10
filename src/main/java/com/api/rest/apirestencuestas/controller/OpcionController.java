@@ -20,7 +20,7 @@ public class OpcionController {
 
     @GetMapping("{encuestaId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<OpcionResponse> getOpcionesByEncuestaId (@PathVariable(value = "encuestaId") Long encuestaId){
+    public Set <OpcionResponse> getOpcionesByEncuestaId (@PathVariable(value = "encuestaId") Long encuestaId){
 
         return mapperOpcion.fromDtoListToResponseList(opcionServiceImpl.getOpcionesByEncuestaId(encuestaId));
     }

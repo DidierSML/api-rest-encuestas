@@ -22,11 +22,11 @@ public class OpcionServiceImpl  implements OpcionService {
     private final MapperOpcion mapperOpcion;
 
     @Override
-    public List <OpcionDto> getOpcionesByEncuestaId(Long encuestaId) {
+    public Set <OpcionDto> getOpcionesByEncuestaId(Long encuestaId) {
 
-        encuestaRepository.findById(encuestaId).orElseThrow(() -> new NotFoundCustomeException("User non-existent in our System"));
+        encuestaRepository.findById(encuestaId).orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
 
-        List <Opcion> opcionesList = (List<Opcion>) opcionRepository.findByEncuestaId(encuestaId);
+        Set<Opcion> opcionesList = opcionRepository.findByEncuestaId(encuestaId);
 
         return mapperOpcion.fromEntityListToDtoList(opcionesList);
     }
