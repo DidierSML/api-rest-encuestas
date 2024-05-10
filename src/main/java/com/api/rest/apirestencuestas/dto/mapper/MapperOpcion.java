@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface MapperOpcion {
@@ -18,10 +19,10 @@ public interface MapperOpcion {
 
     OpcionDto fromEntityToDto (Opcion opcion);
 
-    List<OpcionDto> fromEntityListToDtoList (List <Opcion> opcion);
+    Set <OpcionDto> fromEntityListToDtoList (Set <Opcion> opcion);
 
     OpcionResponse fromDtoToResponse (OpcionDto opcionDto);
 
-    List <OpcionResponse> fromDtoListToResponseList (List <OpcionDto> opcionDtoList);
+    Set <OpcionResponse> fromDtoListToResponseList (Set <OpcionDto> opcionDtoList);
 
 }

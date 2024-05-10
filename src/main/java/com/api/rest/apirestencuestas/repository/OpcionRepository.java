@@ -14,7 +14,8 @@ import java.util.Set;
 public interface OpcionRepository extends JpaRepository<Opcion,Long> {
 
     //Set <Opcion> findByEncuestaId (Long encuestaId);
-    @Query("SELECT o FROM Opcion o WHERE o.encuestaId = :encuestaId")
-    Set<Opcion> findByEncuestaId(@Param("encuestaId") Long encuestaId);
+//    @Query("SELECT o FROM Opcion o WHERE o.encuestaId = :encuestaId")
+//    Set<Opcion> findByEncuestaId(@Param("encuestaId") Long encuestaId);
+    Set<Opcion> findByEncuestaId (Long encuestaId);
 
 }
