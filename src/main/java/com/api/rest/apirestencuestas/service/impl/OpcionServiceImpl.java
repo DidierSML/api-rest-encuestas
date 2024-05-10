@@ -26,8 +26,8 @@ public class OpcionServiceImpl  implements OpcionService {
 
         encuestaRepository.findById(encuestaId).orElseThrow(() -> new NotFoundCustomeException("User non-existent in our System"));
 
-        List <Opcion> animalList = (List<Opcion>) opcionRepository.findByEncuestaId(encuestaId);
+        List <Opcion> opcionesList = (List<Opcion>) opcionRepository.findByEncuestaId(encuestaId);
 
-        return mapperOpcion.fromEntityListToDtoList(animalList);
+        return mapperOpcion.fromEntityListToDtoList(opcionesList);
     }
 }
