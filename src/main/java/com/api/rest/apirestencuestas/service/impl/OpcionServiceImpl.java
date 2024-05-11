@@ -2,6 +2,7 @@ package com.api.rest.apirestencuestas.service.impl;
 
 import com.api.rest.apirestencuestas.dto.OpcionDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperOpcion;
+import com.api.rest.apirestencuestas.dto.request.OpcionRequest;
 import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
 import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
@@ -28,5 +29,11 @@ public class OpcionServiceImpl  implements OpcionService {
         Set<Opcion> opcionesList = opcionRepository.findByEncuestaId(encuestaId);
 
         return mapperOpcion.fromEntityListToDtoList(opcionesList);
+    }
+
+    @Override
+    public Set<OpcionDto> updateOpcionesByEncuestaId(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
+
+
     }
 }
