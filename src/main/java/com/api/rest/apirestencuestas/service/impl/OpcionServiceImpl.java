@@ -32,7 +32,8 @@ public class OpcionServiceImpl  implements OpcionService {
     }
 
     @Override
-    public Set<OpcionDto> updateOpcionesByEncuestaId(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
+    public OpcionDto updateOpcionesByEncuestaId(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
+
 
 
     }
