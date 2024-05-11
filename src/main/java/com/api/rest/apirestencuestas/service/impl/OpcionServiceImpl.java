@@ -4,6 +4,7 @@ import com.api.rest.apirestencuestas.dto.OpcionDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperOpcion;
 import com.api.rest.apirestencuestas.dto.request.OpcionRequest;
 import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
+import com.api.rest.apirestencuestas.model.Encuesta;
 import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
 import com.api.rest.apirestencuestas.repository.OpcionRepository;
@@ -24,7 +25,8 @@ public class OpcionServiceImpl  implements OpcionService {
     @Override
     public Set <OpcionDto> getOpcionesByEncuestaId(Long encuestaId) {
 
-        encuestaRepository.findById(encuestaId).orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
+        encuestaRepository.findById(encuestaId).
+                orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
 
         Set<Opcion> opcionesList = opcionRepository.findByEncuestaId(encuestaId);
 
@@ -32,9 +34,18 @@ public class OpcionServiceImpl  implements OpcionService {
     }
 
     @Override
-    public OpcionDto updateOpcionesByEncuestaId(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
+    public OpcionDto updateOpcionByEncuestaId(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
 
+        Encuesta encuesta = encuestaRepository.findById(encuestaId).
+                orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
 
+        Opcion opcion = opcionRepository.findById(opcionId).
+                orElseThrow(() -> new NotFoundCustomeException("Esta Opción no existe en nuestra BD"));
 
+        if(!opcion.getEncuesta().getId().equals(encuesta.getId())){
+            throw new NotFoundCustomeException("Esta Opción no existe en la encuesta id: " + encuestaId);
+        }
+
+        return mapperOpcion.fromEntityToDto(opcion);
     }
 }
