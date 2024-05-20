@@ -35,7 +35,7 @@ public class Encuesta {
 /*
     "saveEncuesta" -> lógica
     {
-        "pregunta": "¿Cual es el lenguaje de programación más popular en 2024?",
+        "pregunta": "¿Cuál es el lenguaje de programación más popular en 2024?",
         "opciones":
             [
                 {"value": "Java"},
@@ -51,7 +51,7 @@ public class Encuesta {
 
      {
         "id": 1,
-        "pregunta": "¿Cual es el lenguaje de programación más popular en 2024?",
+        "pregunta": "¿Cuál es el lenguaje de programación más popular en 2024?",
         "opciones": [
             {
                 "id": 1,
