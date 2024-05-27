@@ -12,7 +12,6 @@ import com.api.rest.apirestencuestas.service.EncuestaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +29,12 @@ public class EncuestaServiceImpl  implements EncuestaService {
     public EncuestaDto createEncuesta (EncuestaRequest encuestaRequest) {
 
         Encuesta encuesta = mapperEncuesta.fromRequestToEntity(encuestaRequest);
+
+        if(encuesta.getOpciones() != null){
+            for(Opcion opcion: encuesta.getOpciones()){
+                opcion.setEncuesta(encuesta);
+            }
+        }
 
         Encuesta newEncuesta = encuestaRepository.save(encuesta);
 
@@ -58,41 +63,29 @@ public class EncuestaServiceImpl  implements EncuestaService {
 
     @Override
     public EncuestaDto updateEncuestaById(Long encuestaId, EncuestaRequest encuestaRequest) {
-
-        Encuesta existingEncuesta = encuestaRepository.findById(encuestaId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
+        Encuesta existingEncuesta = encuestaRepository.findById(encuestaId)
+                .orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestro Sistema"));
 
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
 
-        Set<OpcionRequest> opcionesRequestList = encuestaRequest.getOpciones();
-        Set<Opcion> opcionesList = new HashSet<>();
-
+        // Obtener las opciones existentes de la encuesta
         Set<Opcion> existingOpciones = existingEncuesta.getOpciones();
 
-        for(OpcionRequest opcionRequest: opcionesRequestList){
+        // Limpiar las opciones existentes, ya que vamos a actualizarlas
+        existingOpciones.clear();
 
-            Opcion opcion = null;
-
-            for(Opcion existingOpcion : existingOpciones){
-                if(existingOpcion.getValue().equals(opcionRequest.getValue())) {
-                    opcion = existingOpcion;
-                    break;
-                }
-            }
-
-            if(opcion == null){
-                opcion = new Opcion();
-                opcion.setValue(opcionRequest.getValue());
-            }
-
-            opcionesList.add(opcion);
+        // Recorrer las nuevas opciones proporcionadas en la solicitud
+        for (OpcionRequest opcionRequest : encuestaRequest.getOpciones()) {
+            Opcion opcion = new Opcion();
+            opcion.setValue(opcionRequest.getValue());
+            opcion.setEncuesta(existingEncuesta); // Establecer la relación con la encuesta
+            existingOpciones.add(opcion); // Agregar la nueva opción a la lista de opciones de la encuesta
         }
 
-        existingEncuesta.setOpciones(opcionesList);
-
+        // Guardar la encuesta actualizada en la base de datos
         existingEncuesta = encuestaRepository.save(existingEncuesta);
 
-
+        // Convertir la encuesta actualizada a un DTO y devolverla
         return mapperEncuesta.fromEntityToDto(existingEncuesta);
     }
 
@@ -107,10 +100,6 @@ public class EncuestaServiceImpl  implements EncuestaService {
     }
 }
 
-/*
 
-
-
- */
 
 
