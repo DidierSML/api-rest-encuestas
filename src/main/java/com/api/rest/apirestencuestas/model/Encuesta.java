@@ -3,6 +3,7 @@ package com.api.rest.apirestencuestas.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -12,11 +13,12 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "opciones")
 @Table(name="encuesta")
 public class Encuesta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "encuesta_id")
     private Long id;
 
@@ -24,9 +26,7 @@ public class Encuesta {
     private String pregunta;
 
     //Una -Encuesta- va a tener -Muchas- Opciones
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "encuesta_id")
-    @OrderBy
+    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL)
     private Set <Opcion> opciones = new HashSet<>();
     //A través de este Set<Opcion> podemos enviar nuestras Opciones en el "saveEncuesta" desde -Postman-
 
