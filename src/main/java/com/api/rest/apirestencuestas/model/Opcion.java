@@ -21,7 +21,6 @@ public class Opcion {
 
     private String value;
 
-    //Solucionando relaciones
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "encuesta_id", nullable = false)
     private Encuesta encuesta;

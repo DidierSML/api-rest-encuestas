@@ -18,7 +18,7 @@ public class Voto {
     private Long id;
 
     //Muchos -Votos- va a tener una -opción-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "opcion_id")
     private Opcion opcion;
 }

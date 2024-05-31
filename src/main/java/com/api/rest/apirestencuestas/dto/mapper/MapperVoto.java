@@ -8,14 +8,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface MapperVoto {
 
     MapperVoto MAPPER_VOTO = Mappers.getMapper(MapperVoto.class);
 
-    Voto fromRequestToEntity (VotoRequest votoRequest);
+    Voto fromRequestToEntity(VotoRequest votoRequest);
 
     VotoDto fromEntityToDto (Voto voto);
 
@@ -23,7 +22,8 @@ public interface MapperVoto {
 
     List<VotoDto> fromEntityListToDtoList (List<Voto> votoList);
 
-    List <VotoResponse> fromDtoListToResponseList (Set <VotoDto> votoDtoList);
+    List <VotoResponse> fromDtoListToResponseList (List <VotoDto> votoDtoList);
+
 
 
 }
