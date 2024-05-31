@@ -32,10 +32,10 @@ public class VotoServiceImpl implements VotoService {
     }
 
     @Override
-    public Set <VotoDto> getAllVotos() {
+    public List <VotoDto> getAllVotos() {
 
-        Set <Voto> votoSet= (Set<Voto>) votoRepository.findAll();
-        return mapperVoto.fromEntityListToDtoList(votoSet);
+        List <Voto> content=  votoRepository.findAll();
+        return mapperVoto.fromEntityListToDtoList(content);
     }
 
     @Override
