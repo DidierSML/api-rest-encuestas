@@ -10,7 +10,7 @@ public interface VotoService {
 
     VotoDto saveVoto (VotoRequest votoRequest);
 
-    Set <VotoDto> getAllVotos ();
+    List <VotoDto> getAllVotos ();
 
     Set<VotoDto> getAllVotosByOpcionId(Long opcionId);
 

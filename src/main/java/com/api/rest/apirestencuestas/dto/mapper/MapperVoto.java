@@ -7,6 +7,7 @@ import com.api.rest.apirestencuestas.model.Voto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring")
@@ -20,9 +21,9 @@ public interface MapperVoto {
 
     VotoResponse fromDtoToResponse (VotoDto votoDto);
 
-    Set <VotoDto> fromEntityListToDtoList (Set <Voto> votoSet);
+    List<VotoDto> fromEntityListToDtoList (List<Voto> votoList);
 
-    Set <VotoResponse> fromDtoListToResponseList (Set <VotoDto> votoDtoSet);
+    List <VotoResponse> fromDtoListToResponseList (Set <VotoDto> votoDtoList);
 
 
 }
