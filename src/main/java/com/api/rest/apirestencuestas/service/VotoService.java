@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VotoService {
 
-    VotoDto saveVoto (Long encuestaId, VotoRequest votoRequest);
+    VotoDto saveVoto (Long encuestaId, Long opcionId, VotoRequest votoRequest);
 
     List <VotoDto> getAllVotosByEncuestaId (Long encuestaId);
 

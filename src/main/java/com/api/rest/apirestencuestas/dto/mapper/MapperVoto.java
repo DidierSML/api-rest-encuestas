@@ -25,5 +25,4 @@ public interface MapperVoto {
     List <VotoResponse> fromDtoListToResponseList (List <VotoDto> votoDtoList);
 
 
-
 }
