@@ -35,8 +35,8 @@ public class VotoServiceImpl implements VotoService {
                 orElseThrow(() -> new NotFoundCustomeException
                         ("La encuesta con id: " + encuestaId + " no existe en nuestra BD"));
 
-        // Asignar el ID de la encuesta al voto (si es necesario)
-        voto.setId(encuestaId);
+        // Asignar el ID de la encuesta al voto
+        voto.setEncuesta(encuesta);
 
         Opcion opcion = opcionRepository.findById(opcionId).
                 orElseThrow(() -> new NotFoundCustomeException

@@ -1,5 +1,6 @@
 package com.api.rest.apirestencuestas.controller;
 
+import com.api.rest.apirestencuestas.dto.VotoDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperVoto;
 import com.api.rest.apirestencuestas.dto.request.VotoRequest;
 import com.api.rest.apirestencuestas.dto.response.VotoResponse;
@@ -25,8 +26,9 @@ public class VotoController {
                                   @PathVariable (value = "opcionId") Long opcionId,
                                   @RequestBody VotoRequest votoRequest){
 
-        return mapperVoto.fromDtoToResponse(votoServiceImpl.saveVoto(encuestaId, opcionId, votoRequest));
-
+        VotoDto savedVotoDto = votoServiceImpl.saveVoto(encuestaId, opcionId, votoRequest);
+        //return mapperVoto.fromDtoToResponse(votoServiceImpl.saveVoto(encuestaId, opcionId, votoRequest));
+        return mapperVoto.fromDtoToResponse(savedVotoDto);
     }
 
     @GetMapping("getAllVotos/{encuestaId}")

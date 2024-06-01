@@ -21,4 +21,9 @@ public class Voto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "opcion_id")
     private Opcion opcion;
+
+    // Muchos -Votos- van a tener una -Encuesta-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "encuesta_id")
+    private Encuesta encuesta;
 }
