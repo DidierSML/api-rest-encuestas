@@ -19,12 +19,13 @@ public class VotoController {
     private final VotoServiceImpl votoServiceImpl;
     private final MapperVoto mapperVoto;
 
-    @PostMapping("saveVotoByEncuestaId/{encuestaId}")
+    @PostMapping("saveVotoEncuestaId/{encuestaId}/opcion/{opcionId}")
     @ResponseStatus(HttpStatus.CREATED)
     public VotoResponse saveVoto (@PathVariable (value = "encuestaId") Long encuestaId,
+                                  @PathVariable (value = "opcionId") Long opcionId,
                                   @RequestBody VotoRequest votoRequest){
 
-        return mapperVoto.fromDtoToResponse(votoServiceImpl.saveVoto(encuestaId,votoRequest));
+        return mapperVoto.fromDtoToResponse(votoServiceImpl.saveVoto(encuestaId, opcionId, votoRequest));
 
     }
 
