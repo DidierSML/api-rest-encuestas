@@ -60,7 +60,7 @@ public class VotoServiceImpl implements VotoService {
     @Override
     public List <VotoDto> getAllVotosByEncuestaId (Long encuestaId) {
 
-        List <Voto> content=  votoRepository.findAll();
+        List <Voto> content=  votoRepository.findByEncuestaId(encuestaId);
         return mapperVoto.fromEntityListToDtoList(content);
     }
 

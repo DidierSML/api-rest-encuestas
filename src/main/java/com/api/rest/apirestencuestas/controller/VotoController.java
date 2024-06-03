@@ -4,7 +4,6 @@ import com.api.rest.apirestencuestas.dto.VotoDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperVoto;
 import com.api.rest.apirestencuestas.dto.request.VotoRequest;
 import com.api.rest.apirestencuestas.dto.response.VotoResponse;
-import com.api.rest.apirestencuestas.model.Voto;
 import com.api.rest.apirestencuestas.service.impl.VotoServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +30,7 @@ public class VotoController {
         return mapperVoto.fromDtoToResponse(savedVotoDto);
     }
 
-    @GetMapping("getAllVotos/{encuestaId}")
+    @GetMapping("getAllVotosByEncuestaId/{encuestaId}")
     @ResponseStatus(HttpStatus.OK)
     public List<VotoResponse> getAllVotos (@PathVariable Long encuestaId){
 
