@@ -6,7 +6,6 @@ import com.api.rest.apirestencuestas.dto.response.VotoResponse;
 import com.api.rest.apirestencuestas.model.Voto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public interface MapperVoto {
 
     Voto fromRequestToEntity(VotoRequest votoRequest);
 
+    //@Mapping(target = "opcionResponse", source = "opcion")
     VotoDto fromEntityToDto (Voto voto);
 
     @Mapping(target = "opcionResponse", source = "opcionDto")

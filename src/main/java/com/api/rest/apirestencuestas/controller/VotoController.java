@@ -17,6 +17,7 @@ import java.util.List;
 public class VotoController {
 
     private final VotoServiceImpl votoServiceImpl;
+
     private final MapperVoto mapperVoto;
 
     @PostMapping("saveVotoEncuestaId/{encuestaId}/opcion/{opcionId}")
@@ -30,9 +31,9 @@ public class VotoController {
         return mapperVoto.fromDtoToResponse(savedVotoDto);
     }
 
-    @GetMapping("getAllVotosByEncuestaId/{encuestaId}")
+    @GetMapping("getVotosByEncuestaId/{encuestaId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<VotoResponse> getAllVotos (@PathVariable Long encuestaId){
+    public Iterable<VotoResponse> getVotosByEncuestaId (@PathVariable Long encuestaId){
 
         return mapperVoto.fromDtoListToResponseList(votoServiceImpl.getAllVotosByEncuestaId(encuestaId));
     }

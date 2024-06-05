@@ -46,6 +46,12 @@ public class OpcionServiceImpl  implements OpcionService {
             throw new NotFoundCustomeException("Esta Opción no existe en la encuesta id: " + encuestaId);
         }
 
+        if(opcionRequest.getValue() != null && !opcionRequest.getValue().isEmpty()){
+            opcion.setValue(opcionRequest.getValue());
+        }
+
+        opcionRepository.save(opcion);
+
         return mapperOpcion.fromEntityToDto(opcion);
     }
 }

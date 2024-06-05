@@ -13,17 +13,23 @@ import com.api.rest.apirestencuestas.repository.OpcionRepository;
 import com.api.rest.apirestencuestas.repository.VotoRepository;
 import com.api.rest.apirestencuestas.service.VotoService;
 import lombok.AllArgsConstructor;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
 public class VotoServiceImpl implements VotoService {
 
     private final VotoRepository votoRepository;
+
     private final EncuestaRepository encuestaRepository;
+
     private final OpcionRepository opcionRepository;
+
     private final MapperVoto mapperVoto;
 
     @Override
