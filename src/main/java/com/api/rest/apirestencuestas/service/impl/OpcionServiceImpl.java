@@ -34,24 +34,23 @@ public class OpcionServiceImpl  implements OpcionService {
     }
 
     @Override
-    public OpcionDto updateOpcionByEncuestaId(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
+    public OpcionDto updateOpcion(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
 
         Encuesta encuesta = encuestaRepository.findById(encuestaId).
                 orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
 
         Opcion opcion = opcionRepository.findById(opcionId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta Opción no existe en nuestra BD"));
+                orElseThrow(() -> new NotFoundCustomeException("Esta Opcion no existe en nuestra BD"));
 
         if(!opcion.getEncuesta().getId().equals(encuesta.getId())){
-            throw new NotFoundCustomeException("Esta Opción no existe en la encuesta id: " + encuestaId);
+            throw new NotFoundCustomeException("La opcion No pertenece a la Encuesta id");
         }
 
-        if(opcionRequest.getValue() != null && !opcionRequest.getValue().isEmpty()){
-            opcion.setValue(opcionRequest.getValue());
-        }
+        opcion.setValue(opcionRequest.getValue());
 
-        opcionRepository.save(opcion);
+        Opcion updatedOpcion = opcionRepository.save(opcion);
 
-        return mapperOpcion.fromEntityToDto(opcion);
+        return mapperOpcion.fromEntityToDto(updatedOpcion);
     }
+
 }

@@ -9,7 +9,6 @@ public class OpcionRequest {
 
     private Long id;
 
-    @Min(value = 1)
-    @Max(value = 20, message = "La respuesta o valor debe contener al menos 1 caracter" )
+//  @Min(value = 1, message = "La respuesta o valor debe contener al menos 1 caracter")
     private String value;
 }

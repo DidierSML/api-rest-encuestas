@@ -15,6 +15,6 @@ public class EncuestaRequest {
     @Size(min = 10, message = "Escriba la pregunta que desea ingresar a la Encuesta" )
     private String pregunta;
 
-    @NotEmpty (message = "La pregunta debe contener al menos una opción")
+    //@NotEmpty (message = "La pregunta debe contener al menos una opción")
     private Set <OpcionRequest> opciones;
 }

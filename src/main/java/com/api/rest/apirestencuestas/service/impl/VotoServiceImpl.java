@@ -1,24 +1,29 @@
 package com.api.rest.apirestencuestas.service.impl;
 
 import com.api.rest.apirestencuestas.dto.VotoDto;
-import com.api.rest.apirestencuestas.dto.mapper.MapperOpcion;
-import com.api.rest.apirestencuestas.dto.mapper.MapperVoto;
 import com.api.rest.apirestencuestas.dto.request.VotoRequest;
-import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
-import com.api.rest.apirestencuestas.model.Encuesta;
-import com.api.rest.apirestencuestas.model.Opcion;
-import com.api.rest.apirestencuestas.model.Voto;
-import com.api.rest.apirestencuestas.repository.EncuestaRepository;
-import com.api.rest.apirestencuestas.repository.OpcionRepository;
-import com.api.rest.apirestencuestas.repository.VotoRepository;
 import com.api.rest.apirestencuestas.service.VotoService;
 import lombok.AllArgsConstructor;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
+
+@Service
+@AllArgsConstructor
+public class VotoServiceImpl implements VotoService {
+    @Override
+    public VotoDto saveVoto(Long encuestaId, Long opcionId, VotoRequest votoRequest) {
+        return null;
+    }
+
+    @Override
+    public List<VotoDto> getAllVotosByEncuestaId(Long encuestaId) {
+        return null;
+    }
+}
+
+/*
+
 
 @Service
 @AllArgsConstructor
@@ -71,3 +76,4 @@ public class VotoServiceImpl implements VotoService {
     }
 
 }
+ */
