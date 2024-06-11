@@ -28,13 +28,12 @@ public class OpcionController {
 
     @PutMapping("encuestaId/{encuestaId}/opcionId/{opcionId}")
     @ResponseStatus(HttpStatus.OK)
-    public OpcionResponse updateOpcionIdByEncuestaId(@PathVariable(value = "encuestaId") Long encuestaId,
-                                                     @PathVariable(value = "opcionId") Long opcionId,
-                                                     @Valid @RequestBody OpcionRequest opcionRequest) {
+    public OpcionResponse updateOpcion (@PathVariable(value = "encuestaId") Long encuestaId,
+                                        @PathVariable(value = "opcionId") Long opcionId,
+                                        @Valid @RequestBody OpcionRequest opcionRequest) {
 
-        return mapperOpcion.fromDtoToResponse(opcionServiceImpl.updateOpcionByEncuestaId(encuestaId,opcionId,opcionRequest));
+        return mapperOpcion.fromDtoToResponse(opcionServiceImpl.updateOpcion(encuestaId,opcionId,opcionRequest));
     }
-
 
 
 }

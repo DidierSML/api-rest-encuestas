@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(name="encuesta")
 public class Encuesta {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "encuesta_id")
@@ -26,7 +27,7 @@ public class Encuesta {
     private String pregunta;
 
     //Una -Encuesta- va a tener -Muchas- Opciones
-    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private Set <Opcion> opciones = new HashSet<>();
     //A través de este Set<Opcion> podemos enviar nuestras Opciones en el "saveEncuesta" desde -Postman-
 

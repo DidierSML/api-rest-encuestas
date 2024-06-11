@@ -9,6 +9,6 @@ public interface OpcionService {
 
    Set<OpcionDto> getOpcionesByEncuestaId (Long encuestaId);
 
-   OpcionDto updateOpcionByEncuestaId (Long encuestaId, Long opcionId, OpcionRequest opcionRequest);
+   OpcionDto updateOpcion (Long encuestaId, Long opcionId, OpcionRequest opcionRequest);
 
 }
