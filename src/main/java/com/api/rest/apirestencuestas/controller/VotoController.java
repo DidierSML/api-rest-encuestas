@@ -18,7 +18,7 @@ public class VotoController {
     private final VotoServiceImpl votoServiceImpl;
     private final MapperVoto mapperVoto;
 
-    @PostMapping("saveVotoEncuestaId/{encuestaId}/opcion/{opcionId}")
+    @PostMapping("saveVotoByEncuestaId/{encuestaId}/opcionId/{opcionId}")
     @ResponseStatus(HttpStatus.CREATED)
     public VotoResponse saveVoto (@PathVariable (value = "encuestaId") Long encuestaId,
                                   @PathVariable (value = "opcionId") Long opcionId,
@@ -28,7 +28,7 @@ public class VotoController {
 
     }
 
-    @GetMapping("getAllVotos/{encuestaId}")
+    @GetMapping("getAllVotosByEncuestaId/{encuestaId}")
     @ResponseStatus(HttpStatus.OK)
     public List<VotoResponse> getAllVotos (@PathVariable Long encuestaId){
 
