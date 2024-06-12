@@ -27,7 +27,7 @@ public interface MapperVoto {
 
     VotoDto fromEntityToDto (Voto voto);
 
-    @Mapping(target = "opcionResponse", source = "opcionDto")
+    //@Mapping(target = "opcionResponse", source = "opcionDto")
     VotoResponse fromDtoToResponse (VotoDto votoDto);
 
     List<VotoDto> fromEntityListToDtoList (List<Voto> votoList);

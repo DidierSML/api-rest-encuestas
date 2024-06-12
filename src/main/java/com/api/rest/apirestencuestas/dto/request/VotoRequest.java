@@ -7,5 +7,6 @@ public class VotoRequest {
 
     private Long id;
 
-    private OpcionRequest opcionRequest;
+    //private OpcionRequest opcionRequest;
+    private OpcionRequest opcion;
 }

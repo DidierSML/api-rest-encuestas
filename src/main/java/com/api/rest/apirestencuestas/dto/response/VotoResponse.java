@@ -7,5 +7,5 @@ public class VotoResponse {
 
     private Long id;
 
-    private OpcionResponse opcionResponse;
+    private OpcionResponse opcion;
 }
