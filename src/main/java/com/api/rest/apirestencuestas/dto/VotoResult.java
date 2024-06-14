@@ -8,5 +8,6 @@ import java.util.List;
 public class VotoResult {
 
     private int totalVotos;
+
     private List<OpcionCount> results;
 }

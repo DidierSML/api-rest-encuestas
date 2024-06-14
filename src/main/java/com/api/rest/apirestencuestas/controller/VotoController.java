@@ -37,6 +37,7 @@ public class VotoController {
     }
 
     @GetMapping("voteCountingByEncuestaId/{encuestaId}")
+    @ResponseStatus(HttpStatus.OK)
     public List <VotoResult> voteCountingByEncuestaId (@PathVariable (value = "encuestaId") Long encuestaId){
 
         return votoServiceImpl.voteCountingByEncuestaId(encuestaId);
