@@ -1,5 +1,6 @@
 package com.api.rest.apirestencuestas.controller;
 
+import com.api.rest.apirestencuestas.dto.VotoResult;
 import com.api.rest.apirestencuestas.dto.mapper.MapperVoto;
 import com.api.rest.apirestencuestas.dto.request.VotoRequest;
 import com.api.rest.apirestencuestas.dto.response.VotoResponse;
@@ -30,9 +31,16 @@ public class VotoController {
 
     @GetMapping("getAllVotosByEncuestaId/{encuestaId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<VotoResponse> getAllVotos (@PathVariable Long encuestaId){
+    public List<VotoResponse> getAllVotos (@PathVariable (value = "encuestaId") Long encuestaId){
 
         return mapperVoto.fromDtoListToResponseList(votoServiceImpl.getAllVotosByEncuestaId(encuestaId));
     }
+
+    @GetMapping("voteCountingByEncuestaId/{encuestaId}")
+    public List <VotoResult> voteCountingByEncuestaId (@PathVariable (value = "encuestaId") Long encuestaId){
+
+        return votoServiceImpl.voteCountingByEncuestaId(encuestaId);
+    }
+
 
 }
