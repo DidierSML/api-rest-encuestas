@@ -1,6 +1,8 @@
 package com.api.rest.apirestencuestas.service.impl;
 
+import com.api.rest.apirestencuestas.dto.OpcionCount;
 import com.api.rest.apirestencuestas.dto.VotoDto;
+import com.api.rest.apirestencuestas.dto.VotoResult;
 import com.api.rest.apirestencuestas.dto.mapper.MapperVoto;
 import com.api.rest.apirestencuestas.dto.request.VotoRequest;
 import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
@@ -14,7 +16,12 @@ import com.api.rest.apirestencuestas.service.VotoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 @Service
 @AllArgsConstructor
@@ -60,6 +67,37 @@ public class VotoServiceImpl implements VotoService {
 
         List <Voto> content=  votoRepository.findByEncuestaId(encuestaId);
         return mapperVoto.fromEntityListToDtoList(content);
+    }
+
+    @Override
+    public List<VotoResult> voteCountingByEncuestaId (Long encuestaId) {
+
+        VotoResult votoResult = new VotoResult();
+        List <Voto> votosList = votoRepository.findByEncuestaId(encuestaId);
+
+        int totalVotos = 0;
+        Map <Long, OpcionCount> map = new HashMap<>();
+
+        for(Voto iterar: votosList){
+            totalVotos++;
+
+            OpcionCount opcionCount = map.get(iterar.getOpcion().getId());
+            if(opcionCount == null){
+                opcionCount = new OpcionCount();
+                opcionCount.setOpcionId(iterar.getOpcion().getId());
+                map.put(iterar.getOpcion().getId(),opcionCount);
+            }
+
+            opcionCount.setCount(opcionCount.getCount() + 1);
+        }
+
+        votoResult.setTotalVotos(totalVotos);
+        votoResult.setResults(new ArrayList<>(map.values()));
+
+        List <VotoResult> votoResults = new ArrayList<>();
+        votoResults.add(votoResult);
+        return votoResults;
+
     }
 }
 
