@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
-
 @Service
 @AllArgsConstructor
 public class VotoServiceImpl implements VotoService {
