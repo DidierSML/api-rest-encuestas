@@ -3,8 +3,7 @@ package com.api.rest.apirestencuestas.service.impl;
 import com.api.rest.apirestencuestas.dto.EncuestaDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperEncuesta;
 import com.api.rest.apirestencuestas.dto.request.EncuestaRequest;
-import com.api.rest.apirestencuestas.dto.request.OpcionRequest;
-import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
+import com.api.rest.apirestencuestas.exceptions.NotFoundCustomException;
 import com.api.rest.apirestencuestas.model.Encuesta;
 import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
@@ -13,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -55,7 +53,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
     public EncuestaDto getEncuestaById(Long encuestaId) {
 
         Encuesta encuesta = encuestaRepository.findById(encuestaId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
+                orElseThrow(() -> new NotFoundCustomException("Esta -Encuesta- no existe en nuestro Sistema"));
 
 
         return mapperEncuesta.fromEntityToDto(encuesta);
@@ -65,7 +63,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
     public EncuestaDto updateEncuestaById(Long encuestaId, EncuestaRequest encuestaRequest) {
 
         Encuesta existingEncuesta = encuestaRepository.findById(encuestaId)
-                .orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestro Sistema"));
+                .orElseThrow(() -> new NotFoundCustomException("Esta Encuesta no existe en nuestro Sistema"));
 
         existingEncuesta.setPregunta(encuestaRequest.getPregunta());
 
@@ -76,7 +74,7 @@ public class EncuestaServiceImpl  implements EncuestaService {
     public void deleteEncuestaById(Long encuestaId) {
 
         Encuesta encuesta = encuestaRepository.findById(encuestaId).
-                orElseThrow(()-> new NotFoundCustomeException("Esta -Encuesta- no existe en nuestro Sistema"));
+                orElseThrow(()-> new NotFoundCustomException("Esta -Encuesta- no existe en nuestro Sistema"));
 
         encuestaRepository.delete(encuesta);
 
