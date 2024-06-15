@@ -3,7 +3,7 @@ package com.api.rest.apirestencuestas.service.impl;
 import com.api.rest.apirestencuestas.dto.OpcionDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperOpcion;
 import com.api.rest.apirestencuestas.dto.request.OpcionRequest;
-import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
+import com.api.rest.apirestencuestas.exceptions.NotFoundCustomException;
 import com.api.rest.apirestencuestas.model.Encuesta;
 import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
@@ -26,7 +26,7 @@ public class OpcionServiceImpl  implements OpcionService {
     public Set <OpcionDto> getOpcionesByEncuestaId(Long encuestaId) {
 
         encuestaRepository.findById(encuestaId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
+                orElseThrow(() -> new NotFoundCustomException("Esta Encuesta no existe en nuestra BD"));
 
         Set<Opcion> opcionesList = opcionRepository.findByEncuestaId(encuestaId);
 
@@ -37,13 +37,13 @@ public class OpcionServiceImpl  implements OpcionService {
     public OpcionDto updateOpcion(Long encuestaId, Long opcionId, OpcionRequest opcionRequest) {
 
         Encuesta encuesta = encuestaRepository.findById(encuestaId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta Encuesta no existe en nuestra BD"));
+                orElseThrow(() -> new NotFoundCustomException("Esta Encuesta no existe en nuestra BD"));
 
         Opcion opcion = opcionRepository.findById(opcionId).
-                orElseThrow(() -> new NotFoundCustomeException("Esta Opcion no existe en nuestra BD"));
+                orElseThrow(() -> new NotFoundCustomException("Esta Opcion no existe en nuestra BD"));
 
         if(!opcion.getEncuesta().getId().equals(encuesta.getId())){
-            throw new NotFoundCustomeException("La opcion No pertenece a la Encuesta id");
+            throw new NotFoundCustomException("La opcion No pertenece a la Encuesta id");
         }
 
         opcion.setValue(opcionRequest.getValue());

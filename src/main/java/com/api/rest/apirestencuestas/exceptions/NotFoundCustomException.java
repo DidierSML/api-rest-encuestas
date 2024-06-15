@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class NotFoundCustomeException extends RuntimeException {
+public class NotFoundCustomException extends RuntimeException {
 
     private final String message;
 }

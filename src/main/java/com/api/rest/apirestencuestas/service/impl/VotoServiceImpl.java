@@ -5,7 +5,7 @@ import com.api.rest.apirestencuestas.dto.VotoDto;
 import com.api.rest.apirestencuestas.dto.VotoResult;
 import com.api.rest.apirestencuestas.dto.mapper.MapperVoto;
 import com.api.rest.apirestencuestas.dto.request.VotoRequest;
-import com.api.rest.apirestencuestas.exceptions.NotFoundCustomeException;
+import com.api.rest.apirestencuestas.exceptions.NotFoundCustomException;
 import com.api.rest.apirestencuestas.model.Encuesta;
 import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.model.Voto;
@@ -36,14 +36,14 @@ public class VotoServiceImpl implements VotoService {
         Voto voto = mapperVoto.fromRequestToEntity(votoRequest);
 
         Encuesta encuesta = encuestaRepository.findById(encuestaId).
-                orElseThrow(() -> new NotFoundCustomeException
+                orElseThrow(() -> new NotFoundCustomException
                         ("La encuesta con id: " + encuestaId + " no existe en nuestra BD"));
 
         // Asignar el ID de la encuesta al voto
         voto.setEncuesta(encuesta);
 
         Opcion opcion = opcionRepository.findById(opcionId).
-                orElseThrow(() -> new NotFoundCustomeException
+                orElseThrow(() -> new NotFoundCustomException
                         ("La opcion con id: " + encuestaId + " no existe en nuestra BD"));
 
         //Verificamos si la opción pertenece a la encuesta
