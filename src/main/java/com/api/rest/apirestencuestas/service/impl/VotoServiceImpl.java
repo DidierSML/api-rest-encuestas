@@ -46,7 +46,7 @@ public class VotoServiceImpl implements VotoService {
                 orElseThrow(() -> new NotFoundCustomException
                         ("La opcion con id: " + encuestaId + " no existe en nuestra BD"));
 
-        //Verificamos si la opción pertenece a la encuesta
+        // Verificamos si la opción pertenece a la encuesta
         if(!opcion.getEncuesta().getId().equals(encuestaId)){
             throw new IllegalArgumentException
                     ("La opción: " + opcionId + " no pertenece a la encuesta : " + encuestaId);
@@ -70,30 +70,50 @@ public class VotoServiceImpl implements VotoService {
     @Override
     public List<VotoResult> voteCountingByEncuestaId (Long encuestaId) {
 
+        //Nueva Instancia de VotoResult
         VotoResult votoResult = new VotoResult();
+
+        //Listamos los votos obtenidos por EncuestaId
         List <Voto> votosList = votoRepository.findByEncuestaId(encuestaId);
 
+        //Inicializamos el contador de votos en 0
         int totalVotos = 0;
+
+        //Creamos un Map donde como clave usaremos un Long, y como valor un Objeto OpcionCount
         Map <Long, OpcionCount> map = new HashMap<>();
 
-        for(Voto iterar: votosList){
+        //Iteramos sobre la lista de votos obtenidos por encuestaId
+        for(Voto voto: votosList){
+            //Al estar iterando por cada voto, incrementamos en 1 por cada voto realizado
             totalVotos++;
 
-            OpcionCount opcionCount = map.get(iterar.getOpcion().getId());
+            //Obtenemos la (OpcionId) y su (Opción) por cada -voto- y lo asignamos a la variable (opcionCount)
+            OpcionCount opcionCount = map.get(voto.getOpcion().getId());
+
+            //Si opcionCount es null (En la 1ra Iteración será null)
             if(opcionCount == null){
+                //Crea una nueva instancia de OpcionCount
                 opcionCount = new OpcionCount();
-                opcionCount.setOpcionId(iterar.getOpcion().getId());
-                map.put(iterar.getOpcion().getId(),opcionCount);
+                //Asigna el (Id) para opcionCount y obtiene el (Id) y la opcion votada
+                opcionCount.setOpcionId(voto.getOpcion().getId());
+                //Finalmente, agrega el (Id) de opcionCount, el (Id) y la opción votada al map
+                map.put(voto.getOpcion().getId(),opcionCount);
             }
 
+            //Incrementamos la var count en 1
             opcionCount.setCount(opcionCount.getCount() + 1);
         }
 
+        //Establece el total de votos en el resultado
         votoResult.setTotalVotos(totalVotos);
+
+        //Mapea los valores guardados en el map y los asigna al Array -results-
         votoResult.setResults(new ArrayList<>(map.values()));
 
+        //Creamos una lista -votoResults- y agregamos los valores mapeados anteriormente
         List <VotoResult> votoResults = new ArrayList<>();
         votoResults.add(votoResult);
+        //retornamos la lista con el -resultado de los votos-
         return votoResults;
 
     }
