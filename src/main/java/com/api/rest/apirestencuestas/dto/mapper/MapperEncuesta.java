@@ -9,7 +9,6 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-
 @Mapper(componentModel = "spring")
 public interface MapperEncuesta {
 
