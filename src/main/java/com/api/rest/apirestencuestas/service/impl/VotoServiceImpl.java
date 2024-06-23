@@ -70,27 +70,32 @@ public class VotoServiceImpl implements VotoService {
     @Override
     public List<VotoResult> voteCountingByEncuestaId (Long encuestaId) {
 
-        //Nueva Instancia de VotoResult
+        //Se crea una nueva Instancia de VotoResult
         VotoResult votoResult = new VotoResult();
 
-        //Listamos los votos obtenidos por EncuestaId
+        //Se Listan los votos obtenidos por EncuestaId
         List <Voto> votosList = votoRepository.findByEncuestaId(encuestaId);
 
-        //Inicializamos el contador de votos en 0
+        //Se inicializa el contador de votos en 0
         int totalVotos = 0;
 
-        //Creamos un Map donde como clave usaremos un Long, y como valor un Objeto OpcionCount
+        //Se crea un Map donde <la clave es el ID de la opción> (Long) y <el valor es una instancia de OpcionCount>.
         Map <Long, OpcionCount> map = new HashMap<>();
 
-        //Iteramos sobre la lista de votos obtenidos por encuestaId
+        //Se itera sobre la lista de votos y contamos los votos por opción
         for(Voto voto: votosList){
-            //Al estar iterando por cada voto, incrementamos en 1 por cada voto realizado
+
+            //Se Incrementa el 'total de votos' por cada voto (Contador General por Encuesta)
             totalVotos++;
 
-            //Obtenemos la (OpcionId) y su (Opción) por cada -voto- y lo asignamos a la variable (opcionCount)
+            //Se obtiene la (OpcionId) y el valor de la (Opción) por cada -voto- y lo asignamos a la variable (opcionCount)
             OpcionCount opcionCount = map.get(voto.getOpcion().getId());
 
-            //Si opcionCount es null (En la 1ra Iteración será null)
+            /*
+                Si opcionCount es null: En la primera Iteración será -Null-
+                (Es decir, es la primera vez que se encuentra esta opción; entonces, creará una nueva instancia de
+                 OpcionCount, establece su ID y la agrega al map.)
+             */
             if(opcionCount == null){
                 //Crea una nueva instancia de OpcionCount
                 opcionCount = new OpcionCount();
@@ -100,20 +105,24 @@ public class VotoServiceImpl implements VotoService {
                 map.put(voto.getOpcion().getId(),opcionCount);
             }
 
-            //Incrementamos la var count en 1
+            //Aumenta la variable (count) ++; Incrementando así el conteo de votos para la opción correspondiente.
             opcionCount.setCount(opcionCount.getCount() + 1);
         }
 
-        //Establece el total de votos en el resultado
+        //Se Establece el total de votos en el resultado (Contador General)
         votoResult.setTotalVotos(totalVotos);
 
-        //Mapea los valores guardados en el map y los asigna al Array -results-
+        //Se Convierte los valores del -map- en una Lista y los establece como resultado
         votoResult.setResults(new ArrayList<>(map.values()));
 
-        //Creamos una lista -votoResults- y agregamos los valores mapeados anteriormente
+        /*
+            Se Crea una lista -votoResults- y agregamos los valores mapeados anteriormente:
+                (Contador General de Votos por Encuesta) y (Contador de votos por opción)
+        */
         List <VotoResult> votoResults = new ArrayList<>();
         votoResults.add(votoResult);
-        //retornamos la lista con el -resultado de los votos-
+
+        //retornamos la Lista con el -results- que contiene el (total de votos por Encuesta) + (total de votos por Opción)
         return votoResults;
 
     }
