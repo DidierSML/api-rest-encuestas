@@ -9,9 +9,11 @@ import com.api.rest.apirestencuestas.model.Opcion;
 import com.api.rest.apirestencuestas.repository.EncuestaRepository;
 import com.api.rest.apirestencuestas.service.EncuestaService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -41,11 +43,15 @@ public class EncuestaServiceImpl  implements EncuestaService {
     }
 
     @Override
-    public List <EncuestaDto> getAllEncuestas () {
+    public Page <EncuestaDto> getAllEncuestas(int page, int size) {
 
-        List <Encuesta> content = encuestaRepository.findAll();
+        Pageable pageable = PageRequest.of(page, size);
 
-        return mapperEncuesta.fromEntityListToDtoList(content);
+        Page <Encuesta> encuestaPage = encuestaRepository.findAll(pageable);
+
+        List <EncuestaDto> content = mapperEncuesta.fromEntityListToDtoList(encuestaPage.getContent());
+
+        return new PageImpl<>(content, pageable, encuestaPage.getTotalElements());
 
     }
 
