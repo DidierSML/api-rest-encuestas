@@ -1,15 +1,19 @@
 package com.api.rest.apirestencuestas.controller;
 
+import com.api.rest.apirestencuestas.dto.EncuestaDto;
 import com.api.rest.apirestencuestas.dto.mapper.MapperEncuesta;
 import com.api.rest.apirestencuestas.dto.request.EncuestaRequest;
 import com.api.rest.apirestencuestas.dto.response.EncuestaResponse;
 import com.api.rest.apirestencuestas.service.impl.EncuestaServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -29,9 +33,16 @@ public class EncuestaController {
 
     @GetMapping("getAllEncuestas")
     @ResponseStatus(HttpStatus.OK)
-    public List <EncuestaResponse> getAllEncuestas (){
+    public Page <EncuestaResponse> getAllEncuestas (@RequestParam (defaultValue = "0") int page,
+                                                   @RequestParam (defaultValue = "10") int size){
 
-        return mapperEncuesta.fromDtoListToResponseList(encuestaServiceImpl.getAllEncuestas());
+        Page <EncuestaDto> encuestaDtoPage = encuestaServiceImpl.getAllEncuestas(page,size);
+
+        List <EncuestaResponse> encuestaResponses = encuestaDtoPage.getContent().stream()
+                .map(mapperEncuesta::fromDtoToResponse)
+                .toList();
+
+        return new PageImpl<>(encuestaResponses, encuestaDtoPage.getPageable(), encuestaDtoPage.getTotalElements());
     }
 
     @GetMapping("{encuestaId}")
