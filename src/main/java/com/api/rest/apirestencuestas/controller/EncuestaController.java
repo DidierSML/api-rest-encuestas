@@ -5,6 +5,7 @@ import com.api.rest.apirestencuestas.dto.mapper.MapperEncuesta;
 import com.api.rest.apirestencuestas.dto.request.EncuestaRequest;
 import com.api.rest.apirestencuestas.dto.response.EncuestaResponse;
 import com.api.rest.apirestencuestas.service.impl.EncuestaServiceImpl;
+import com.api.rest.apirestencuestas.utils.AppConstants;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,10 +34,11 @@ public class EncuestaController {
 
     @GetMapping("getAllEncuestas")
     @ResponseStatus(HttpStatus.OK)
-    public Page <EncuestaResponse> getAllEncuestas (@RequestParam (defaultValue = "0") int page,
-                                                   @RequestParam (defaultValue = "10") int size){
+    public Page <EncuestaResponse> getAllEncuestas (
+            @RequestParam (value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int pageNo,
+            @RequestParam (value = "pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int pageSize){
 
-        Page <EncuestaDto> encuestaDtoPage = encuestaServiceImpl.getAllEncuestas(page,size);
+        Page <EncuestaDto> encuestaDtoPage = encuestaServiceImpl.getAllEncuestas(pageNo,pageSize);
 
         // Convertir la lista de EncuestaDto a EncuestaResponse usando el método del mapper pasando el contenido de page
         List<EncuestaResponse> encuestaResponses = mapperEncuesta.fromDtoListToResponseList(encuestaDtoPage.getContent());
