@@ -38,9 +38,8 @@ public class EncuestaController {
 
         Page <EncuestaDto> encuestaDtoPage = encuestaServiceImpl.getAllEncuestas(page,size);
 
-        List <EncuestaResponse> encuestaResponses = encuestaDtoPage.getContent().stream()
-                .map(mapperEncuesta::fromDtoToResponse)
-                .toList();
+        // Convertir la lista de EncuestaDto a EncuestaResponse usando el método del mapper pasando el contenido de page
+        List<EncuestaResponse> encuestaResponses = mapperEncuesta.fromDtoListToResponseList(encuestaDtoPage.getContent());
 
         return new PageImpl<>(encuestaResponses, encuestaDtoPage.getPageable(), encuestaDtoPage.getTotalElements());
     }
@@ -69,3 +68,11 @@ public class EncuestaController {
 
 
 }
+
+/*
+    -Forma alternativa de Convertir la listaDto a Response usando Stream.Collectors-
+
+         List <EncuestaResponse> encuestaResponses = encuestaDtoPage.getContent().stream()
+             .map(mapperEncuesta::fromDtoToResponse)
+             .toList();
+ */
