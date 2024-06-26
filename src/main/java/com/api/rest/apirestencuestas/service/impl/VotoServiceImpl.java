@@ -78,7 +78,11 @@ public class VotoServiceImpl implements VotoService {
         //Se crea una nueva Instancia de VotoResult
         VotoResult votoResult = new VotoResult();
 
-        //Se Listan los votos obtenidos por EncuestaId
+        //CRUD repository method
+        votoRepository.findById(encuestaId).
+                orElseThrow(() -> new NotFoundCustomException("Esta encuesta no existe en nuestra BD"));
+
+        //Se Listan los Votos obtenidos por EncuestaId - Custom method
         List <Voto> votosList = votoRepository.findByEncuestaId(encuestaId);
 
         //Se inicializa el contador de votos en 0
