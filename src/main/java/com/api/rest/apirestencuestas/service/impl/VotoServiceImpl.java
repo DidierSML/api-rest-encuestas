@@ -73,7 +73,7 @@ public class VotoServiceImpl implements VotoService {
     }
 
     @Override
-    public List<VotoResult> voteCountingByEncuestaId (Long encuestaId) {
+    public List <VotoResult> voteCountingByEncuestaId (Long encuestaId) {
 
         //Se crea una nueva Instancia de VotoResult
         VotoResult votoResult = new VotoResult();
@@ -104,14 +104,18 @@ public class VotoServiceImpl implements VotoService {
             if(opcionCount == null){
                 //Crea una nueva instancia de OpcionCount
                 opcionCount = new OpcionCount();
-                //Asigna el (Id) para opcionCount y obtiene el (Id) y la opcion votada
+
+                //Obtiene el (Id) y la opción votada y lo asigna al opcionId de OpcionCount
                 opcionCount.setOpcionId(voto.getOpcion().getId());
+                //Obtiene el (value) de la opción votada, y lo asigna al value de OcpionCount
+                opcionCount.setValue(voto.getOpcion().getValue());
+
                 //Finalmente, agrega el (Id) de opcionCount, el (Id) y la opción votada al map
                 map.put(voto.getOpcion().getId(),opcionCount);
             }
 
-            //Aumenta la variable (count) ++; Incrementando así el conteo de votos para la opción correspondiente.
-            opcionCount.setCount(opcionCount.getCount() + 1);
+            //Aumenta la variable (numberOfVotes) ++; Incrementando así el conteo de votos para la opción correspondiente.
+            opcionCount.setNumberOfVotes(opcionCount.getNumberOfVotes() + 1);
         }
 
         //Se Establece el total de votos en el resultado (Contador General)
