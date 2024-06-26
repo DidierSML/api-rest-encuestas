@@ -6,6 +6,9 @@ import lombok.Data;
 public class OpcionCount {
 
     private Long opcionId;
+    //
+    private String value;
 
-    private int count;
+    private int numberOfVotes;
+
 }

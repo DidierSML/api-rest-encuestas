@@ -28,7 +28,6 @@ public class Opcion {
     @JoinColumn(name = "encuesta_id", nullable = false)
     private Encuesta encuesta;
 
-    //
     @OneToMany(mappedBy = "opcion", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Voto> votos = new HashSet<>();
 }

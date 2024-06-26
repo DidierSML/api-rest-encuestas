@@ -12,7 +12,7 @@
 
     <groupId>com.api.rest</groupId>
     <artifactId>api-rest-encuestas</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>api-rest-encuestas</name>
     <description>Demo project for Spring Boot</description>
 
