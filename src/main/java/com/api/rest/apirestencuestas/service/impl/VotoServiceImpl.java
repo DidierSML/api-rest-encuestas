@@ -68,6 +68,10 @@ public class VotoServiceImpl implements VotoService {
 
         List <Voto> content = votoRepository.findByEncuestaId(encuestaId);
 
+        if(content.isEmpty()){
+            throw new NotFoundCustomException("La Encuesta existe, pero no ha recibido votos aún");
+        }
+
         return mapperVoto.fromEntityListToDtoList(content);
 
     }
