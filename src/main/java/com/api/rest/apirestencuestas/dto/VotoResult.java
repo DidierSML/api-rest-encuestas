@@ -9,5 +9,5 @@ public class VotoResult {
 
     private int totalVotos;
 
-    private List<OpcionCount> results;
+    private List <OpcionCount> results;
 }
