@@ -73,9 +73,9 @@ public class EncuestaController {
 
 /*
 
-    [import java.util.stream.Collectors;]
+    [import java.util.stream.Collectors; ]
 
-    -Forma alternativa de Convertir la listaDto a Response usando Stream.Collectors-
+    -Forma alternativa de Convertir la listaDto a Response usando "Stream.Collectors"-
 
          List <EncuestaResponse> encuestaResponses = encuestaDtoPage.getContent().stream()
              .map(mapperEncuesta::fromDtoToResponse)

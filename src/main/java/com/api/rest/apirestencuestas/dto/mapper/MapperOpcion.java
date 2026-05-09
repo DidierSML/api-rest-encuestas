@@ -20,7 +20,7 @@ public interface MapperOpcion {
 
     Set <OpcionDto> fromEntityListToDtoList (Set <Opcion> opcion);
 
-    // @Mapping(target = "value", source = "value")
+    //@Mapping(target = "value", source = "value")
     OpcionResponse fromDtoToResponse (OpcionDto opcionDto);
 
     Set <OpcionResponse> fromDtoListToResponseList (Set <OpcionDto> opcionDtoList);

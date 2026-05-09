@@ -11,12 +11,12 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-/*
-    Al usar: (uses = MapperOpcion.class) en la Interfaz MapperVoto,
-    le estás diciendo a MapStruct que también considere las reglas
-    de mapeo definidas en -MapperOpcion- al realizar mapeos en MapperVoto.
-    Esto permite reutilizar la lógica de mapeo definida en -MapperOpcion-
-    dentro de -MapperVoto-.
+/**
+ *Al usar: (uses = MapperOpcion.class) en la Interfaz 'MapperVoto',
+ *     le estás diciendo a 'MapStruct' que también considere las reglas
+ *     de mapeo definidas en -MapperOpcion- al realizar mapeos en MapperVoto.
+ *     Esto permite reutilizar la lógica de mapeo definida en -MapperOpcion-
+ *     dentro de -MapperVoto-.
  */
 @Mapper(componentModel = "spring",uses = MapperOpcion.class)
 public interface MapperVoto {
