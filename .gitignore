@@ -1,29 +1,55 @@
+# =========================
+# HELP FILES
+# =========================
 HELP.md
 
-### STS ###
+# =========================
+# MAVEN
+# =========================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# JAVA
+# =========================
+*.class
+
+# =========================
+# SPRING TOOL SUITE (STS)
+# =========================
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
+.sts4-cache/
 
-### IntelliJ IDEA ###
-.idea
+# =========================
+# INTELLIJ IDEA
+# =========================
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# =========================
+# VS CODE
+# =========================
 .vscode/
+
+# =========================
+# LOG FILES
+# =========================
+*.log
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# OPTIONAL - GENERATED FILES
+# =========================
+dependency-reduced-pom.xml
